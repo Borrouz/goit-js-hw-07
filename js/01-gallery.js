@@ -8,6 +8,7 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 const gallery = document.querySelector('.gallery');
+
 const galleryLi = galleryItems.map(({preview, original, description}) =>
 `<li data-preview = ${preview} class = "gallery__link">
 <a class"gallery__link" href = ${original}>
@@ -23,18 +24,23 @@ gallery.insertAdjacentHTML('beforeend', galleryLi);
 
 gallery.addEventListener("click", onClick);
 
-function onClick (e) {
-    const dataPreview = e.target.dataset.source;
-    const imgDesc = e.target.alt;
+function onClick (event) {
+    event.preventDefault()
+    const dataPreview = event.target.dataset.source;
+    const imgDesc = event.target.alt;
+
+    if (event.target === gallery) {
+        return
+    }
+
     const instance = basicLightbox.create(`
-    <div>
+    <div class = 'modal'>
     <img src="${dataPreview}" alt="${imgDesc}"/>
     </div>
 `)
+
 instance.show()
 }
 
 
 
-
-console.log(galleryItems);
