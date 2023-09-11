@@ -1,9 +1,4 @@
 'use strict'
-// todo 
-// 1. Чтоб не качались картинки
-// 2. чтоб esc закрывал картинку
-
-
 
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
@@ -32,13 +27,19 @@ function onClick (event) {
     if (event.target === gallery) {
         return
     }
+    document.addEventListener("keydown", esc);
+    function esc (event) {
+        if (event.key === 'Escape'  ) {
+            instance.close()
+        }
+    }
 
     const instance = basicLightbox.create(`
     <div class = 'modal'>
     <img src="${dataPreview}" alt="${imgDesc}"/>
     </div>
 `)
-
+console.log(instance.show.name);
 instance.show()
 }
 
